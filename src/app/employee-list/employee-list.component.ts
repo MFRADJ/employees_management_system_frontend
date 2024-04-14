@@ -12,11 +12,6 @@ export class EmployeeListComponent implements OnInit {
   constructor() {
    }
 
-<<<<<<< Updated upstream
-  ngOnInit(): void {
-  }
-
-=======
  ngOnInit(): void {
   this.employees = [
     {
@@ -48,5 +43,4 @@ export class EmployeeListComponent implements OnInit {
    // }
  // )
   //}
->>>>>>> Stashed changes
 }
