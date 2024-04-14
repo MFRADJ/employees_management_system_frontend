@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Employee } from '../model/employee';
+import { EmployeeService } from '../employee.service';
+import { error } from 'console';
+
 
 @Component({
   selector: 'app-employee-list',
@@ -7,40 +10,30 @@ import { Employee } from '../model/employee';
   styleUrls: ['./employee-list.component.css']
 })
 export class EmployeeListComponent implements OnInit {
-  employees: Employee[] = [];
+  employees: Employee[] = [] ;
+  loading: boolean = true;
 
-  constructor() {
+  constructor(private employeeService: EmployeeService) {
+   
    }
 
- ngOnInit(): void {
-  this.employees = [
-    {
-      "id": 1002,
-      "datOfBirth": new Date("1994-05-18"),
-      "departement": "marsaille",
-      "position": "Tech",
-      "salary": 50000,
-      "email": "tom.hanks@gmail.com",
-      "lastname": "hanks",
-      "firstname": "tom"
-    },
-    {
-      "id": 1003,
-      "datOfBirth": new Date("1994-05-18"),
-      "departement": "Paris",
-      "position": "Eng",
-      "salary": 60000,
-      "email": "ali.abid@gmail.com",
-      "lastname": "abid",
-      "firstname": "ali"
-    }
-  ]
-  //  this.getEmployees();
+  ngOnInit(): void {
+    this.getEmployees();
   }
-  //private getEmployees(){
-   // this.employeeService.getEmployeesList().subscribe(data => {
-    //  this.employees = data
-   // }
- // )
-  //}
+  private getEmployees() {
+    this.employeeService.getEmployeesList().subscribe( {
+      next: (data) => {
+        this.employees = data;
+        this.loading = false;
+      },
+      error: (error) => {
+        console.error('Erreur lors de la récupération des employés:', error);
+        this.loading = false;
+      },
+      complete: () => {
+        console.log('Opération de récupération des employés complétée.');
+      }
+    });
+  }
+
 }

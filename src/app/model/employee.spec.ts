@@ -1,3 +1,5 @@
+<<<<<<< HEAD:src/app/employee.spec.ts
+=======
 import { Employee } from './employee';
 
 describe('Employee', () => {
@@ -5,3 +7,4 @@ describe('Employee', () => {
   //  expect(new Employee()).toBeTruthy();
   });
 });
+>>>>>>> EmployeeListComponent:src/app/model/employee.spec.ts
